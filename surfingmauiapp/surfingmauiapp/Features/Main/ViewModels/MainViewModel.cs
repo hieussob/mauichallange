@@ -9,8 +9,8 @@ namespace surfingmauiapp.Features.Main.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private bool _isPlaying;
         public ObservableCollection<Story> Stories { get; set; }
-
         public ICommand HeartCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand PlayMusicCommand { get; set; }
@@ -100,17 +100,23 @@ namespace surfingmauiapp.Features.Main.ViewModels
             PlayMusicCommand = new Command(PlayMusicCommandExecute);
         }
 
+
         private async void PlayMusicCommandExecute(object obj)
         {
-            var fileName = "TiengCuoiTreCon-ThanhKhiet_3knbn.mp3";
-            var filePath = Path.Combine("Resources", "Raw", fileName);
             var mediaManager = CrossMediaManager.Current;
-            await mediaManager.Play("D:\\Documents\\Maui\\surfingmauiapp\\surfingmauiapp\\Resources\\Raw\\TiengCuoiTreCon-ThanhKhiet_3knbn.mp3");
+            if (!_isPlaying)
+            {
+                await mediaManager.Play("D:\\Documents\\Maui\\surfingmauiapp\\surfingmauiapp\\Resources\\Raw\\abc.mp3");
+                _isPlaying = !_isPlaying;
+                return;
+            }
+            await mediaManager.Stop();
+            _isPlaying = !_isPlaying;
         }
 
         private void SaveCommandExecute(Story story)
         {
-            if(story == null) return;
+            if (story == null) return;
             story.IsSaved = !story.IsSaved;
         }
 

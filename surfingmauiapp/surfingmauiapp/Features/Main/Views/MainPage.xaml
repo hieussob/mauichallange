@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:icon="clr-namespace:surfingmauiapp.Resources.Fonts"
+    xmlns:extentions="clr-namespace:surfingmauiapp"
     xmlns:res="clr-namespace:surfingmauiapp.Resources">
 
     <ScrollView>
@@ -20,7 +21,7 @@
                 Grid.Column="1"
                 FontSize="{x:Static res:Dimens.FontSize20}"
                 VerticalOptions="Center"
-                FontFamily="FontAwesome"
+                FontFamily="{x:Static icon:FontNames.FontAwesome}"
                 Background="Transparent"
                 Text="{x:Static icon:AwesomeIconfont.Thorn}"
                 HorizontalOptions="Start" />
@@ -40,7 +41,7 @@
                 TextColor="{x:Static res:AppColors.Black}"
                 Grid.Column="3"
                 Background="Transparent"
-                FontFamily="FontAwesome"
+                FontFamily="{x:Static icon:FontNames.FontAwesome}"
                 Text="{x:Static icon:AwesomeIconfont.s}"
                 VerticalOptions="Center"
                 FontSize="{x:Static res:Dimens.FontSize20}"
@@ -54,7 +55,7 @@
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout
                         Orientation="Horizontal"
-                        ItemSpacing="10" />
+                        ItemSpacing="{x:Static res:Dimens.Spacing10}" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -67,7 +68,7 @@
                                 BackgroundColor="{Binding BorderColor}">
                                 <Border.StrokeShape>
                                     <RoundRectangle
-                                        CornerRadius="55" />
+                                        CornerRadius="{x:Static res:Dimens.Radius55}" />
                                 </Border.StrokeShape>
                                 <Border.Content>
                                     <Image
@@ -81,172 +82,172 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <CollectionView
+            <ScrollView
+                x:Name="scrollView"
                 Grid.Row="5"
-                Grid.Column="1"
+                Grid.Column="0"
                 Grid.ColumnSpan="6"
-                x:Name="CollectionPost"
-                ItemsSource="{Binding Stories}"
-                HorizontalScrollBarVisibility="Never">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout
-                        Orientation="Vertical"
-                        ItemSpacing="10" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <AbsoluteLayout
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center">
-                            <Border
-                                Background="{x:Static res:AppColors.White}"
-                                WidthRequest="317"
-                                StrokeThickness="0"
-                                HeightRequest="235">
-                                <Border.StrokeShape>
-                                    <RoundRectangle
-                                        CornerRadius="15,143,15,15" />
-                                </Border.StrokeShape>
-                                <Border.Content>
-                                    <Image
-                                        Source="bg01.png"
-                                        Aspect="AspectFill"
-                                        HeightRequest="235" />
-                                </Border.Content>
-                            </Border>
-                            <Grid
-                                Margin="10"
-                                RowDefinitions="11*,46*,20*,13*,17*,13*,49*,39*,20*"
-                                ColumnDefinitions="3*,8*">
-                                <AbsoluteLayout
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center">
-                                    <Border
-                                        WidthRequest="46"
-                                        HeightRequest="46"
-                                        BackgroundColor="{Binding BorderColor}">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle
-                                                CornerRadius="46" />
-                                        </Border.StrokeShape>
-                                        <Border.Content>
-                                            <Image
-                                                Source="{Binding Image}"
-                                                Aspect="Fill"
-                                                HeightRequest="43"
-                                                WidthRequest="43" />
-                                        </Border.Content>
-                                    </Border>
-                                </AbsoluteLayout>
-                                <VerticalStackLayout
-                                    Grid.Column="1"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Center">
-                                    <Label
-                                        Text="{Binding NickName}"
-                                        FontSize="{x:Static res:Dimens.FontSize12}"
-                                        FontAttributes="Bold"
-                                        TextTransform="Uppercase"
-                                        TextColor="{x:Static res:AppColors.DarkGray}" />
-                                    <Label
-                                        Text="{Binding LastOnline}"
-                                        FontSize="{x:Static res:Dimens.FontSize9}"
-                                        TextTransform="Uppercase"
-                                        Opacity="0.51"
-                                        TextColor="{x:Static res:AppColors.CharcoalGray}" />
-                                </VerticalStackLayout>
-                                <HorizontalStackLayout
-                                    Grid.Row="3">
+                Orientation="Vertical"
+                VerticalScrollBarVisibility="Always">
+                <StackLayout
+                    x:Name="CollectionPost"
+                    BindableLayout.ItemsSource="{Binding Stories}">
+                    <StackLayout.GestureRecognizers>
+                        <PanGestureRecognizer
+                            PanUpdated="PanGestureRecognizer_PanUpdated" />
+                    </StackLayout.GestureRecognizers>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <AbsoluteLayout
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Margin="{extentions:EdgeInsets Vertical={x:Static res:Dimens.Spacing10}}">
+                                <Border
+                                    Background="{x:Static res:AppColors.White}"
+                                    WidthRequest="317"
+                                    StrokeThickness="{x:Static res:Dimens.StrokeThickenss0}"
+                                    StrokeShape="RoundRectangle 15,143,15,15"
+                                    HeightRequest="235">
+                                    <Border.Content>
+                                        <Image
+                                            Source="bg01.png"
+                                            Aspect="AspectFill"
+                                            HeightRequest="235" />
+                                    </Border.Content>
+                                </Border>
+                                <Grid
+                                    Margin="{extentions:EdgeInsets All={x:Static res:Dimens.Spacing10}}"
+                                    RowDefinitions="11*,46*,20*,13*,17*,13*,49*,39*,20*"
+                                    ColumnDefinitions="3*,8*">
+                                    <AbsoluteLayout
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center">
+                                        <Border
+                                            WidthRequest="46"
+                                            HeightRequest="46"
+                                            BackgroundColor="{Binding BorderColor}">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle
+                                                    CornerRadius="{x:Static res:Dimens.Radius46}" />
+                                            </Border.StrokeShape>
+                                            <Border.Content>
+                                                <Image
+                                                    Source="{Binding Image}"
+                                                    Aspect="Fill"
+                                                    HeightRequest="43"
+                                                    WidthRequest="43" />
+                                            </Border.Content>
+                                        </Border>
+                                    </AbsoluteLayout>
+                                    <VerticalStackLayout
+                                        Grid.Column="1"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Center">
+                                        <Label
+                                            Text="{Binding NickName}"
+                                            FontSize="{x:Static res:Dimens.FontSize12}"
+                                            FontAttributes="Bold"
+                                            TextTransform="Uppercase"
+                                            TextColor="{x:Static res:AppColors.DarkGray}" />
+                                        <Label
+                                            Text="{Binding LastOnline}"
+                                            FontSize="{x:Static res:Dimens.FontSize9}"
+                                            TextTransform="Uppercase"
+                                            Opacity="{x:Static res:Dimens.Opacity}"
+                                            TextColor="{x:Static res:AppColors.CharcoalGray}" />
+                                    </VerticalStackLayout>
+                                    <HorizontalStackLayout
+                                        Grid.Row="3">
+                                        <ImageButton
+                                            Margin="{extentions:EdgeInsets Left={x:Static res:Dimens.Spacing10}}"
+                                            Command="{Binding BindingContext.HeartCommand, Source={x:Reference CollectionPost}}"
+                                            CommandParameter="{Binding .}"
+                                            HeightRequest="13">
+                                            <ImageButton.Triggers>
+                                                <DataTrigger
+                                                    TargetType="ImageButton"
+                                                    Binding="{Binding IsHearted, Mode=TwoWay}"
+                                                    Value="True">
+                                                    <Setter
+                                                        Property="Source"
+                                                        Value="heart_red.png" />
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    TargetType="ImageButton"
+                                                    Binding="{Binding IsHearted, Mode=TwoWay}"
+                                                    Value="False">
+                                                    <Setter
+                                                        Property="Source"
+                                                        Value="heart.png" />
+                                                </DataTrigger>
+                                            </ImageButton.Triggers>
+                                        </ImageButton>
+                                        <Label
+                                            Text="{Binding HeartNumber}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="StartAndExpand"
+                                            FontSize="{x:Static res:Dimens.FontSize11}"
+                                            TextColor="{x:Static res:AppColors.CharcoalGray}" />
+                                    </HorizontalStackLayout>
                                     <ImageButton
-                                        Margin="10,0,0,0"
-                                        Command="{Binding BindingContext.HeartCommand, Source={x:Reference CollectionPost}}"
+                                        Grid.Row="4"
+                                        Margin="0,-15,0,20"
+                                        HorizontalOptions="Center"
+                                        Command="{Binding BindingContext.SaveCommand,Source={x:Reference CollectionPost }}"
                                         CommandParameter="{Binding .}"
                                         HeightRequest="13">
                                         <ImageButton.Triggers>
                                             <DataTrigger
                                                 TargetType="ImageButton"
-                                                Binding="{Binding IsHearted, Mode=TwoWay}"
+                                                Binding="{Binding IsSaved, Mode=TwoWay}"
                                                 Value="True">
                                                 <Setter
                                                     Property="Source"
-                                                    Value="heart_red.png" />
+                                                    Value="saved.png" />
                                             </DataTrigger>
                                             <DataTrigger
                                                 TargetType="ImageButton"
-                                                Binding="{Binding IsHearted, Mode=TwoWay}"
+                                                Binding="{Binding IsSaved, Mode=TwoWay}"
                                                 Value="False">
                                                 <Setter
                                                     Property="Source"
-                                                    Value="heart.png" />
+                                                    Value="saveinstagram.png" />
                                             </DataTrigger>
                                         </ImageButton.Triggers>
                                     </ImageButton>
-                                    <Label
-                                        Text="{Binding HeartNumber}"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="StartAndExpand"
-                                        FontSize="{x:Static res:Dimens.FontSize11}"
-                                        TextColor="{x:Static res:AppColors.CharcoalGray}" />
-                                </HorizontalStackLayout>
-                                <ImageButton
-                                    Grid.Row="5"
-                                    Margin="0,-15,0,20"
-                                    HorizontalOptions="Center"
-                                    Command="{Binding BindingContext.SaveCommand,Source={x:Reference CollectionPost }}"
-                                    CommandParameter="{Binding .}"
-                                    HeightRequest="13">
-                                    <ImageButton.Triggers>
-                                        <DataTrigger
-                                            TargetType="ImageButton"
-                                            Binding="{Binding IsSaved, Mode=TwoWay}"
-                                            Value="True">
-                                            <Setter
-                                                Property="Source"
-                                                Value="saved.png" />
-                                        </DataTrigger>
-                                        <DataTrigger
-                                            TargetType="ImageButton"
-                                            Binding="{Binding IsSaved, Mode=TwoWay}"
-                                            Value="False">
-                                            <Setter
-                                                Property="Source"
-                                                Value="saveinstagram.png" />
-                                        </DataTrigger>
-                                    </ImageButton.Triggers>
-                                </ImageButton>
-                                <ImageButton
-                                    Grid.Row="8"
-                                    HorizontalOptions="Center"
-                                    Source="playbutton.png"
-                                    Command="{Binding BindingContext.PlayMusicCommand, Source={x:Reference CollectionPost }}"
-                                    HeightRequest="39" />
+                                    <ImageButton
+                                        Grid.Row="8"
+                                        HorizontalOptions="Center"
+                                        Source="playbutton.png"
+                                        Command="{Binding BindingContext.PlayMusicCommand, Source={x:Reference CollectionPost }}"
+                                        HeightRequest="39" />
 
-                                <VerticalStackLayout
-                                    Grid.Row="8"
-                                    Grid.RowSpan="2"
-                                    Grid.Column="1">
-                                    <Label
-                                        Text="{Binding MainDetail}"
-                                        WidthRequest="217"
-                                        FontAttributes="Bold"
-                                        FontSize="{x:Static res:Dimens.FontSize18}"
-                                        TextColor="{x:Static res:AppColors.White}"
-                                        VerticalOptions="Center" />
-                                    <Label
-                                        Text="{Binding Place}"
-                                        WidthRequest="217"
-                                        FontAttributes="Bold"
-                                        FontSize="{x:Static res:Dimens.FontSize9}"
-                                        TextColor="{x:Static res:AppColors.SoftGray}"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="Center" />
-                                </VerticalStackLayout>
-                            </Grid>
-
-                        </AbsoluteLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                    <VerticalStackLayout
+                                        Grid.Row="8"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="1">
+                                        <Label
+                                            Text="{Binding MainDetail}"
+                                            WidthRequest="217"
+                                            FontAttributes="Bold"
+                                            FontSize="{x:Static res:Dimens.FontSize18}"
+                                            TextColor="{x:Static res:AppColors.White}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Text="{Binding Place}"
+                                            WidthRequest="217"
+                                            FontAttributes="Bold"
+                                            FontSize="{x:Static res:Dimens.FontSize9}"
+                                            TextColor="{x:Static res:AppColors.SoftGray}"
+                                            HorizontalOptions="Start"
+                                            VerticalOptions="Center" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </AbsoluteLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
         </Grid>
     </ScrollView>
 </ContentPage>

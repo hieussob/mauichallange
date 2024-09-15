@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using surfingmauiapp.Features.Main.ViewModels;
+using surfingmauiapp.Features.Main.Views;
 
 namespace surfingmauiapp
 {
@@ -15,6 +17,8 @@ namespace surfingmauiapp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("FontAwesome.ttf", "FontAwesome");
                 });
+            builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddTransient<MainPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

@@ -8,6 +8,9 @@ namespace surfingmauiapp.Resources
 {
     public class Dimens
     {
+        public static double Spacing1 = 1;
+        public static double Spacing10 = 10;
+
         public static double FontSize8 = 8;
         public static double FontSize9 = 9;
         public static double FontSize10 = 10;
@@ -24,6 +27,13 @@ namespace surfingmauiapp.Resources
         public static double FontSize21 = 21;
         public static double FontSize22 = 22;
         public static double FontSize30 = 30;
+
+        public static double StrokeThickenss0 = 0;
+
+        public static double Radius46 = 46;
+        public static double Radius55 = 55;
+
+        public static double Opacity = 0.5;
 
     }
 }
