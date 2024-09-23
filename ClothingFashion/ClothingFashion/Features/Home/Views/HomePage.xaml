@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ClothingFashion.Features.Home.Views.HomePage"
+    xmlns:ui="clr-namespace:ClothingFashion.UI"
+    xmlns:controls="clr-namespace:ClothingFashion.Controls"
+    xmlns:vm="clr-namespace:ClothingFashion.Features.Home.ViewModels"
+    x:DataType="vm:HomeViewModel"
+    xmlns:extensions="clr-namespace:ClothingFashion.Extensions"
+    Title="HomePage">
+    <ContentPage.Resources>
+        <Style
+            x:Key="SwipeActionStyle"
+            TargetType="controls:SwipeAction">
+            <Setter
+                Property="HeightRequest"
+                Value="54" />
+            <Setter
+                Property="VerticalOptions"
+                Value="End" />
+            <Setter
+                Property="Margin"
+                Value="12" />
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Border
+            WidthRequest="300"
+            HeightRequest="591"
+            StrokeThickness="{x:Static ui:Dimens.StrokeThickenss5}"
+            BackgroundColor="{x:Static ui:AppColors.Transparent}"
+            StrokeShape="RoundRectangle 40">
+            <Grid
+                RowDefinitions="7*,3*">
+                <ScrollView
+                    x:Name="scrollView"
+                    Orientation="Horizontal">
+                    <FlexLayout
+                        Background="{x:Static ui:AppColors.Black}"
+                        Direction="Row"
+                        Wrap="Wrap"
+                        WidthRequest="1000"
+                        AlignContent="Start"
+                        AlignItems="Stretch"
+                        BindableLayout.ItemsSource="{Binding Items}"
+                        BindableLayout.ItemTemplateSelector="{controls:ItemTemplateSelectors}">
+                        <FlexLayout.GestureRecognizers>
+                            <PanGestureRecognizer
+                                PanUpdated="PanGestureRecognizer_PanUpdated" />
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
+                </ScrollView>
+                <Label Text="KID FASHION"
+                       FontSize="{x:Static ui:Dimens.FontSize30}"
+                       FontAttributes="Bold"
+                       Margin="{extensions:EdgeInsets Top={x:Static ui:Dimens.Spacing40}}"
+                       HorizontalOptions="Center"/>
+                <Border
+                    Background="{x:Static ui:AppColors.Black}"
+                    StrokeShape="RoundRectangle 40"
+                    Grid.Row="1">
+                    <Grid
+                        RowDefinitions="20,60,15,25,30,40,20">
+                        <Label
+                            Grid.Row="1"
+                            WidthRequest="204"
+                            HorizontalTextAlignment="Center"
+                            LineBreakMode="WordWrap"
+                            FontSize="{x:Static ui:Dimens.FontSize18}"
+                            TextColor="{x:Static ui:AppColors.White}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            TextTransform="Uppercase"
+                            Text="Discover our new dress for you" />
+                        <Label
+                            Grid.Row="3"
+                            WidthRequest="204"
+                            HorizontalTextAlignment="Center"
+                            FontSize="{x:Static ui:Dimens.FontSize10}"
+                            Text="Discover Trendy Outfits, Chic Accesssories, Cozy Essential for Kids of All Sges" />
+                        <controls:SwipeAction
+                            Grid.Row="5"
+                            Style="{x:StaticResource SwipeActionStyle}"
+                            SwipeActionCommand="{Binding GoHomeCommand}">
+                            <controls:SwipeAction.Track>
+                                <Border
+                                    Style="{x:Static ui:Styles.SwipeActionTrackStyle}">
+                                    <HorizontalStackLayout
+                                        Opacity="0.75"
+                                        HorizontalOptions="End"
+                                        Margin="{extensions:EdgeInsets Horizontal={x:Static ui:Dimens.Spacing6},
+                                                Vertical={x:Static ui:Dimens.Spacing1}}">
+
+                                        <Label
+                                            Text=">"
+                                            TextColor="{x:Static ui:AppColors.Black}"
+                                            Style="{x:Static ui:Styles.SwipeActionDirectionTextStyle}" />
+                                        <Label
+                                            Text=">"
+                                            TextColor="{x:Static ui:AppColors.Gray}"
+                                            Style="{x:Static ui:Styles.SwipeActionDirectionTextStyle}" />
+                                        <Label
+                                            Text=">"
+                                            TextColor="{x:Static ui:AppColors.White}"
+                                            Style="{x:Static ui:Styles.SwipeActionDirectionTextStyle}" />
+
+                                    </HorizontalStackLayout>
+
+                                </Border>
+                            </controls:SwipeAction.Track>
+                            <controls:SwipeAction.Thumb>
+                                <Border
+                                    Style="{x:Static ui:Styles.SwipeActionThumbStyle}">
+
+                                    <Label
+                                        Text="GET STARTED"
+                                        Style="{x:Static ui:Styles.SwipeActionTextStyle}" />
+
+                                </Border>
+                            </controls:SwipeAction.Thumb>
+                        </controls:SwipeAction>
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+        </Border>
+    </ScrollView>
+</ContentPage>
